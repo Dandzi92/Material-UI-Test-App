@@ -9,12 +9,13 @@ const useStyles = makeStyles(() => ({
     padding: "20px",
     width: "80%",
     height: "100%",
+    fontWeight: "bold"
   },
 }));
 
-const Home = () => {
+const Home = ({userRole}) => {
   const styles = useStyles();
-  return <div className={styles.main}>Home</div>;
+  return <div className={styles.main}>{`Welcome to the ROOMZ portal, ${userRole}!`}</div>;
 };
 
 export default Home;

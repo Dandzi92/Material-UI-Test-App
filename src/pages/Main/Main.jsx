@@ -7,10 +7,12 @@ import Home from "../Home";
 import Workspaces from "../Workspaces";
 import { Switch } from "react-router";
 import { makeStyles } from "@material-ui/styles";
+import {useSelector} from "react-redux";
+import {getLoggedInUser} from "../../shared/selectors";
 
 const useStyles = makeStyles(() => ({
   container: {
-    minHeight: "100vh",
+    height: "100vh",
     display: "flex",
     flexDirection: "column",
   },
@@ -22,13 +24,16 @@ const useStyles = makeStyles(() => ({
 
 const Main = () => {
   const styles = useStyles();
+  const loggedInUser = useSelector(getLoggedInUser)
   return (
     <div className={styles.container}>
-      <Header />
+      <Header userRole={loggedInUser?.role}/>
       <main className={styles.main}>
         <SideBar />
         <Switch>
-          <Route exact path={mainPagePaths.HOME} component={Home} />
+          <Route exact path={mainPagePaths.HOME}  render={() => (
+             <Home userRole={loggedInUser?.role} />
+          )}/>
           <Route exact path={mainPagePaths.WORKSPACES} component={Workspaces} />
         </Switch>
       </main>

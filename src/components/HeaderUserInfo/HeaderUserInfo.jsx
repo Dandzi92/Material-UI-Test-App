@@ -9,10 +9,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const HeaderUserInfo = () => {
+const HeaderUserInfo = ({userRole}) => {
   const classes = useStyles();
 
-  return <div className={classes.info}>USER | ROOMZ</div>;
+  return <div className={classes.info}>{`${userRole} | ROOMZ`}</div>;
 };
 
 export default HeaderUserInfo;

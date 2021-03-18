@@ -7,19 +7,19 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     backgroundColor: "black",
     padding: "20px 15px",
-    boxShadow: "0px 5px 5px  black",
+    boxShadow: "0px 2px 5px  black",
     justifyContent: "space-between",
     alignItems: "center",
     height: "5%",
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
   return (
     <header className={classes.header}>
       <HeaderLogo />
-      <HeaderUserInfo />
+      <HeaderUserInfo {...props}/>
     </header>
   );
 };
