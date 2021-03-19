@@ -1,4 +1,5 @@
 import React from "react";
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
@@ -15,7 +16,7 @@ const useStyles = makeStyles(() => ({
 
 const Home = ({userRole}) => {
   const styles = useStyles();
-  return <div className={styles.main}>{`Welcome to the ROOMZ portal, ${userRole}!`}</div>;
+  return <Typography className={styles.main} component="div">{`Welcome to the ROOMZ portal, ${userRole}!`}</Typography>;
 };
 
 export default Home;

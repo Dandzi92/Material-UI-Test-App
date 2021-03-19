@@ -1,6 +1,6 @@
 import { mainPagePaths } from "./paths";
 
-export const sidebarItems = [
+export const sidebarItemsMap = [
   {
     title: "Home",
     path: mainPagePaths.HOME,

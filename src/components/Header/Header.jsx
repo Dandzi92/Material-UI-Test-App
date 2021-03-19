@@ -1,26 +1,33 @@
 import { makeStyles } from "@material-ui/styles";
 import HeaderLogo from "../HeaderLogo/HeaderLogo";
 import HeaderUserInfo from "../HeaderUserInfo/HeaderUserInfo";
+import {AppBar, Toolbar} from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   header: {
+    backgroundColor: "black"
+  },
+  container: {
     display: "flex",
-    backgroundColor: "black",
-    padding: "20px 15px",
-    boxShadow: "0px 2px 5px  black",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "5%",
+    width: "100%",
+    padding: "10px"
   },
 }));
 
 const Header = (props) => {
   const classes = useStyles();
   return (
-    <header className={classes.header}>
-      <HeaderLogo />
-      <HeaderUserInfo {...props}/>
-    </header>
+    <AppBar  className={classes.header}>
+      <Toolbar>
+        <div className={classes.container}>
+          <HeaderLogo />
+          <HeaderUserInfo {...props}/>
+        </div>
+        </ Toolbar>
+
+    </AppBar >
   );
 };
 

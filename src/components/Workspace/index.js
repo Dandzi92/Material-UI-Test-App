@@ -1,2 +1,2 @@
-import Workspace from './Workspace'
-export default Workspace
+import CreateWorkspace from './Workspace'
+export default CreateWorkspace

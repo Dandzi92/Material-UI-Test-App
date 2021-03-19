@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const workspacesFeature = createSlice({
     name: 'workspaces',
     initialState: {
-        workspaces: [],
+        workspaces: [{title: 'Test workspace', type: 'room'}],
     },
     reducers: {
         createWorkspace: (state, { payload }) => {

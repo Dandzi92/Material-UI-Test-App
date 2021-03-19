@@ -1,18 +1,16 @@
 import { makeStyles } from "@material-ui/styles";
-import HeaderLogo from "../HeaderLogo/HeaderLogo";
-import { useSelector } from "react-redux";
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(() => ({
   info: {
-    color: "white",
-    fontFamily: "Raleway",
+    color: "white"
   },
 }));
 
 const HeaderUserInfo = ({userRole}) => {
   const classes = useStyles();
 
-  return <div className={classes.info}>{`${userRole} | ROOMZ`}</div>;
+  return <Typography className={classes.info} component="div">{`${userRole} | ROOMZ`}</Typography>;
 };
 
 export default HeaderUserInfo;

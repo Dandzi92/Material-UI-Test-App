@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/styles";
-import { sidebarItems } from "../../shared/sidebarItems";
+import { sidebarItemsMap } from "../../shared/sidebarItemsMap";
 import { NavLink } from "react-router-dom";
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import {List, ListItem, ListItemIcon, ListItemText, Toolbar} from "@material-ui/core";
 import { Drawer } from '@material-ui/core';
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
@@ -26,9 +26,10 @@ const useStyles = makeStyles(() => ({
 const SideBar = () => {
   const classes = useStyles();
   return (
-      <Drawer variant='persistent' className={classes.sidebar} open="true">
+      <Drawer variant='persistent' className={classes.sidebar} open>
+        <Toolbar />
         <List>
-          {sidebarItems.map((sidebarItem, index) => {
+          {sidebarItemsMap.map((sidebarItem, index) => {
             return (
                 <NavLink
                     to={sidebarItem.path}
