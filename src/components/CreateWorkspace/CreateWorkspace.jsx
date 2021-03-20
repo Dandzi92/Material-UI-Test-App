@@ -6,6 +6,7 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import {useState} from "react";
 import {createWorkspace} from "../../features/workspaces";
 import {useDispatch} from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
 
 
 const useStyles = makeStyles(() => ({
@@ -13,9 +14,9 @@ const useStyles = makeStyles(() => ({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: "1px solid gray",
-        borderTop: "1px solid gray",
-        padding: '5px'
+        margin: '50px 0',
+        width: "100%",
+        maxWidth: "500px"
     },
     button: {
         cursor: "pointer",
@@ -26,16 +27,21 @@ const useStyles = makeStyles(() => ({
 const CreateWorkspace = ({closeCreateMode}) => {
     const classes = useStyles();
     const [selectValue, setSelectValue] = useState('room')
+    const [inputValue, setInputValue] = useState('room')
     const dispatch = useDispatch()
     const handleSelectChange = (e) => {
         setSelectValue(e.target.value)
     }
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value)
+    }
     const handleNewWorkspaceAddition = () => {
         const createWorkspaceItem = {
             type: selectValue,
-
+            id: uuidv4(),
+            title: inputValue
         }
-        dispatch(createWorkspace())
+        dispatch(createWorkspace(createWorkspaceItem))
         closeCreateMode()
     }
     return (
@@ -49,14 +55,14 @@ const CreateWorkspace = ({closeCreateMode}) => {
                 onChange={handleSelectChange}
                 size="small"
             >
-                <MenuItem value={'room'}>Room</MenuItem>
-                <MenuItem value={'desk'}>Desk</MenuItem>
-                <MenuItem value={'huddle'}>Huddle</MenuItem>
+                <MenuItem size="small" value={'room'}>Room</MenuItem>
+                <MenuItem size="small" value={'desk'}>Desk</MenuItem>
+                <MenuItem  size="small" value={'huddle'}>Huddle</MenuItem>
             </Select>
             </FormControl>
-            <TextField id="outlined-basic" variant="outlined" size="small"/>
+            <TextField id="outlined-basic" variant="outlined" size="small" onChange={handleInputChange}/>
             <CloseIcon className={classes.button} button="true" onClick={closeCreateMode}/>
-            <SaveOutlinedIcon className={classes.button} button="true" /*onClick={handleRemoveMode}*//>
+            <SaveOutlinedIcon className={classes.button} button="true" onClick={handleNewWorkspaceAddition} />
         </Box >
     );
 };

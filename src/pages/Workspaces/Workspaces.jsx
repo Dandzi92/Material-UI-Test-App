@@ -4,27 +4,38 @@ import {getWorkspaces} from "../../shared/selectors";
 import {useSelector} from "react-redux";
 import Workspace from "../../components/Workspace";
 import Typography from "@material-ui/core/Typography";
-import {Button} from "@material-ui/core";
+import {Button, Toolbar} from "@material-ui/core";
 import CreateWorkspace from "../../components/CreateWorkspace";
+import DeleteWorkspaceModal from "../../components/Modals/DeleteWorkspace/DeleteWorkpace";
 
 const useStyles = makeStyles(() => ({
   start: {
     display: "flex",
-    justifyContent: "center",
-    flex: "1",
-    marginTop: "150px"
+    flexDirection: "column",
+    flex: 1,
   },
   container: {
-    width: "50%"
+    position: "relative",
+    flex: "1",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems:  "center",
+    height: "100%"
   },
-  // workspaces: {
-  //   justifyContent: "space-between",
-  //   marginBottom: "30px"
-  // },
+  workspaces: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    marginBottom: "30px",
+    width: "100%",
+    padding: "100px 0",
+    maxWidth: "500px"
+  },
   addItem: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: "200px"
+    width: "100%",
+    maxWidth: "500px"
   }
 }));
 
@@ -38,10 +49,11 @@ const Workspaces = () => {
   const closeCreateMode = () => {setCreateMode(false)}
   return (
     <div className={styles.start}>
+      <Toolbar />
       <div className={styles.container}>
         <div className={styles.addItem}>
           <Typography component="h1">List of workspaces</Typography>
-          <Button
+          <Button disabled={isCreateMode}
               color="primary"
               variant="contained"
               onClick={handleCreateMode}
@@ -50,9 +62,10 @@ const Workspaces = () => {
           </Button>
         </div>
         <div className={styles.workspaces}>
-          <CreateWorkspace closeCreateMode={closeCreateMode}/>
+          {isCreateMode && <CreateWorkspace closeCreateMode={closeCreateMode}/>}
           {workspaces.map(workspace => <Workspace key={workspace.type} title={workspace.title} type={workspace.type} />)}
         </div>
+        <DeleteWorkspaceModal/>
       </div>
     </div>
 

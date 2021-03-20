@@ -4,6 +4,6 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 
 export const workspacesIconsMap = {
     room: MeetingRoomOutlinedIcon,
-    desktop: DesktopWindowsOutlinedIcon,
+    desk: DesktopWindowsOutlinedIcon,
     huddle: ApartmentIcon
 }
