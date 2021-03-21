@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         top: "50%",
         left: "50%",
+        transform: "translate(-50%, -50%)"
     },
     caption: {
         padding: "0 0 50px 0"
@@ -31,17 +32,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal({closeRemoveMode, handleRemoveWorkspace, isDeleteMode}) {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const body = (
         <div  className={classes.paper}>
@@ -49,10 +41,10 @@ export default function SimpleModal() {
                 Do you really want to delete this workspace?
             </Typography>
             <div className={classes.buttons}>
-                <Button color="primary" onClick={handleOpen}>
+                <Button color="primary" onClick={closeRemoveMode}>
                     Cancel
                 </Button>
-                <Button color="primary" onClick={handleOpen}>
+                <Button color="primary" onClick={handleRemoveWorkspace}>
                     Delete
                 </Button>
             </div>
@@ -62,8 +54,8 @@ export default function SimpleModal() {
 
     return (
             <Modal
-                open={open}
-                onClose={handleClose}
+                open={isDeleteMode}
+                onClose={closeRemoveMode}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
                 disablePortal

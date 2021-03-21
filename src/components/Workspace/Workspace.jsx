@@ -22,16 +22,12 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const Workspace = ({type, title}) => {
+const Workspace = ({type, title, handleDeleteMode}) => {
     const classes = useStyles();
     const WorkSpaceIcon = workspacesIconsMap[type]
     const [isEditMode, setEditMode] = useState(false)
-    const [isRemoveMode, setRemoveMode] = useState(false)
     const handleEditMode = () => {
         setEditMode((state) => !state)
-    }
-    const handleRemoveMode = () => {
-        setRemoveMode((state) => !state)
     }
     return (
         <Box className={classes.container}>
@@ -39,7 +35,7 @@ const Workspace = ({type, title}) => {
             <Typography component="div">{type}</Typography>
             <Typography component="div">{title}</Typography>
             <EditOutlinedIcon className={classes.button} button="true" onClick={handleEditMode}/>
-            <DeleteOutlineOutlinedIcon className={classes.button} button="true" onClick={handleRemoveMode}/>
+            <DeleteOutlineOutlinedIcon className={classes.button} button="true" onClick={handleDeleteMode}/>
         </Box >
     );
 };

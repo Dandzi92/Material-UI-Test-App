@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import { makeStyles } from "@material-ui/styles";
 import {getWorkspaces} from "../../shared/selectors";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Workspace from "../../components/Workspace";
 import Typography from "@material-ui/core/Typography";
 import {Button, Toolbar} from "@material-ui/core";
 import CreateWorkspace from "../../components/CreateWorkspace";
 import DeleteWorkspaceModal from "../../components/Modals/DeleteWorkspace/DeleteWorkpace";
+import {deleteWorkspace} from "../../features/workspaces";
 
 const useStyles = makeStyles(() => ({
   start: {
@@ -42,11 +43,32 @@ const useStyles = makeStyles(() => ({
 const Workspaces = () => {
   const styles = useStyles();
   const workspaces = useSelector(getWorkspaces)
+  const dispatch = useDispatch()
   const [isCreateMode, setCreateMode] = useState(false)
   const handleCreateMode = () => {
     setCreateMode(state => !state)
   }
   const closeCreateMode = () => {setCreateMode(false)}
+  const [isDeleteMode, setDeleteMode] = useState(false)
+  const [workspaceDeleteId, setWorkspaceDeleteId] = useState(null)
+  const handleDeleteMode = (id) => {
+    if (!isDeleteMode) {
+      setWorkspaceDeleteId(id)
+      setDeleteMode(true)
+      return
+    }
+    setWorkspaceDeleteId(null)
+    setDeleteMode(false)
+  }
+  const closeRemoveMode = () => {
+    setWorkspaceDeleteId(null)
+    setDeleteMode(false)
+  }
+  const handleRemoveWorkspace = (workspaceDeleteId) => {
+    dispatch(deleteWorkspace({id: workspaceDeleteId}))
+    closeRemoveMode()
+  }
+
   return (
     <div className={styles.start}>
       <Toolbar />
@@ -63,9 +85,9 @@ const Workspaces = () => {
         </div>
         <div className={styles.workspaces}>
           {isCreateMode && <CreateWorkspace closeCreateMode={closeCreateMode}/>}
-          {workspaces.map(workspace => <Workspace key={workspace.type} title={workspace.title} type={workspace.type} />)}
+          {workspaces.map(workspace => <Workspace key={workspace.type} title={workspace.title} type={workspace.type} handleDeleteMode={() => handleDeleteMode(workspace.id)}/>)}
         </div>
-        <DeleteWorkspaceModal/>
+        <DeleteWorkspaceModal handleRemoveWorkspace={() => handleRemoveWorkspace(workspaceDeleteId)} closeRemoveMode={closeRemoveMode} isDeleteMode={isDeleteMode}/>
       </div>
     </div>
 

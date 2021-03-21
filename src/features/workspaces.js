@@ -18,7 +18,7 @@ export const workspacesFeature = createSlice({
             });
         },
         deleteWorkspace: (state, { payload }) => {
-            state.workspaces = state.workspaces.filter((item) => item._id !== payload._id);
+            state.workspaces = state.workspaces.filter((item) => item.id !== payload.id);
         },
     },
 });
